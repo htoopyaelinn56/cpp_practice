@@ -6,9 +6,11 @@
 //
 
 #include <iostream>
+#include "singly_linked_list.hpp"
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[])
+{
     // insert code here...
-    std::cout << "Hello, World!\n";
+    singly_linked_list::test();
     return 0;
 }
