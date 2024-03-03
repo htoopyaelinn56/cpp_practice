@@ -10,26 +10,9 @@
 
 #include <iostream>
 #include <vector>
+#include "node.hpp"
+
 using namespace std;
-
-template <typename T>
-class Node
-{
-public:
-    T data;
-    Node *next;
-
-    Node(T data)
-    {
-        this->data = data;
-        this->next = nullptr;
-    }
-
-    void print()
-    {
-        cout << data << endl;
-    }
-};
 
 template <typename T>
 class SinglyLinkedList
@@ -252,13 +235,14 @@ namespace singly_linked_list
 
         cout << "vec 1 => ";
         for (auto i = vec_1.begin(); i != vec_1.end(); ++i)
-            cout << *i << " "; // 1 3
+            cout << *i << " "; // 1 2 3 4
 
         n1.from_vec(vec_1);
         cout << endl
              << "linked list => ";
-        n1.print_list();
+        n1.print_list(); // 1 2 3 4
     }
+
 }
 
 #endif /* singly_linked_list_hpp */
