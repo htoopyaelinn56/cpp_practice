@@ -19,10 +19,12 @@ class SinglyLinkedList
 {
 public:
     Node<T> *head;
+    Node<T> *tail;
 
     SinglyLinkedList()
     {
         this->head = nullptr;
+        this->tail = nullptr;
     }
 
     Node<T> *insert(T data)
@@ -32,6 +34,7 @@ public:
         if (head == nullptr)
         {
             this->head = new_node;
+            this->tail = new_node;
         }
         else
         {
@@ -64,6 +67,25 @@ public:
 
         int index = index_of(node);
         return __common_insert(index, data);
+    }
+
+    Node<T> *insert_last(T data)
+    {
+        Node<T> *new_node = new Node<T>(data);
+
+        if (head == nullptr)
+        {
+            this->head = new_node;
+            this->tail = new_node;
+        }
+        else
+        {
+            Node<T> *temp = this->tail;
+            temp->next = new_node;
+            this->tail = new_node;
+        }
+
+        return this->tail;
     }
 
     void print_list()
@@ -241,6 +263,11 @@ namespace singly_linked_list
         cout << endl
              << "linked list => ";
         n1.print_list(); // 1 2 3 4
+
+        n1.insert_last(1000); // 1000
+        n1.print_list();      // 1 2 3 4 1000
+        n1.insert_last(2000); // 2000
+        n1.print_list();      // 1 2 3 4 1000 2000
     }
 
 }
