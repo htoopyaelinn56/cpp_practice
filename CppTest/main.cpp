@@ -11,6 +11,6 @@
 int main(int argc, const char *argv[])
 {
     // insert code here...
-    singly_linked_list::test();
+    doubly_linked_list::test();
     return 0;
 }

@@ -18,6 +18,7 @@ public:
         if (this->head == nullptr)
         {
             this->head = new_node;
+            this->tail = new_node;
         }
         else
         {
@@ -44,6 +45,47 @@ public:
             new_node->next = next_node;
             next_node->previous = new_node;
         }
+        return new_node;
+    }
+
+    Node<T> *insert_before(Node<T> *node, T data)
+    {
+
+        if (node == this->head)
+        {
+            insert(data);
+            return this->head;
+        }
+
+        Node<T> *new_node = new Node<T>(data);
+
+        Node<T> *temp = node;
+        Node<T> *previous_node = temp->previous;
+        temp->previous = new_node;
+        new_node->next = temp;
+        previous_node->next = new_node;
+        new_node->previous = previous_node;
+
+        return new_node;
+    }
+
+    Node<T> *insert_last(T data)
+    {
+        Node<T> *new_node = new Node<T>(data);
+
+        if (this->head == nullptr)
+        {
+            this->head = new_node;
+            this->tail = new_node;
+        }
+        else
+        {
+            Node<T> *temp = this->tail;
+            temp->next = new_node;
+            new_node->previous = temp;
+            this->tail = new_node;
+        }
+        return new_node;
     }
 };
 
@@ -67,6 +109,16 @@ namespace doubly_linked_list
 
         d.insert_after(n1, 0);
         d.print_list(); // 3 300 2 200 1 0
+
+        Node<int> *n0 = d.insert_before(n3, -1);
+        d.print_list(); // -1 3 300 2 200 1 0
+
+        d.insert_before(n3, 333);
+        d.print_list(); // -1 3 333 300 2 200 1 0
+
+        d.insert_last(10000);
+        cout << "tail is " << d.tail->data << endl;
+        d.print_list(); // -1 3 333 300 2 200 1 0 10000
     }
 } // namespace doubly_linked_list
 
