@@ -7,7 +7,7 @@ class Node
 public:
     T data;
     Node *next;
-    Node *previous;
+    Node *previous; // not in singly linked list
 
     Node(T data)
     {

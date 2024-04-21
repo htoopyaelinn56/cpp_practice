@@ -45,6 +45,11 @@ public:
             new_node->next = next_node;
             next_node->previous = new_node;
         }
+
+        if (this->tail == node)
+        {
+            this->tail = new_node;
+        }
         return new_node;
     }
 
@@ -71,21 +76,44 @@ public:
 
     Node<T> *insert_last(T data)
     {
-        Node<T> *new_node = new Node<T>(data);
+        return insert_after(this->tail, data);
+    }
+
+    void delete_node(Node<T> *node)
+    {
 
         if (this->head == nullptr)
         {
-            this->head = new_node;
-            this->tail = new_node;
+            return;
+        }
+
+        if (this->head == node)
+        {
+            this->head = node->next;
+            node = nullptr;
+        }
+        else if (this->tail == node)
+        {
+            this->tail = node->previous;
+            this->tail->next = nullptr;
+            node = nullptr;
         }
         else
         {
-            Node<T> *temp = this->tail;
-            temp->next = new_node;
-            new_node->previous = temp;
-            this->tail = new_node;
+            node->previous->next = node->next;
+            node->next->previous = node->previous;
+            node = nullptr;
         }
-        return new_node;
+    }
+
+    void delete_first()
+    {
+        delete_node(this->head);
+    }
+
+    void delete_last()
+    {
+        delete_node(this->tail);
     }
 };
 
@@ -94,6 +122,8 @@ namespace doubly_linked_list
     void test()
     {
         DoublyLinkedList<int> d;
+
+        d.delete_node(new Node<int>(-999)); // nothing happened
 
         Node<int> *n1 = d.insert(1);
         Node<int> *n2 = d.insert(2);
@@ -114,11 +144,27 @@ namespace doubly_linked_list
         d.print_list(); // -1 3 300 2 200 1 0
 
         d.insert_before(n3, 333);
-        d.print_list(); // -1 3 333 300 2 200 1 0
+        d.print_list(); // -1 333 3 300 2 200 1 0
 
         d.insert_last(10000);
+        d.print_list(); // -1 333 3 300 2 200 1 0 10000
+        cout << "head is " << d.head->data << endl;
         cout << "tail is " << d.tail->data << endl;
-        d.print_list(); // -1 3 333 300 2 200 1 0 10000
+
+        d.delete_node(n0);
+        cout << "head is " << d.head->data << endl; // 333 3 300 2 200 0 10000
+
+        d.delete_node(n1);
+        d.print_list(); // -333 3 300 2 200 0 10000
+
+        d.delete_node(d.tail);
+        d.print_list(); // -333 3 300 2 200 0
+
+        d.delete_first();
+        d.print_list(); // 3 300 2 200 0
+
+        d.delete_last();
+        d.print_list(); // 3 300 2 200
     }
 } // namespace doubly_linked_list
 
