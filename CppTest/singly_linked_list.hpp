@@ -269,7 +269,6 @@ namespace singly_linked_list
         n1.insert_last(2000); // 2000
         n1.print_list();      // 1 2 3 4 1000 2000
     }
-
 }
 
 #endif /* singly_linked_list_hpp */

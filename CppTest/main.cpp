@@ -1,16 +1,6 @@
-//
-//  main.cpp
-//  CppTest
-//
-//  Created by Htoo Pyae Linn on 27/02/2024.
-//
+#include "circular_linked_list.hpp"
 
-#include <iostream>
-#include "doubly_linked_list.hpp"
-
-int main(int argc, const char *argv[])
+int main()
 {
-    // insert code here...
-    doubly_linked_list::test();
-    return 0;
+    circular_linked_list::test();
 }
