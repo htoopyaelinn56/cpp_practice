@@ -1,6 +1,13 @@
-#include "circular_linked_list.hpp"
+#include "stack.hpp"
+#include <string>
+
+void test1()
+{
+    stack::test();
+}
 
 int main()
 {
-    circular_linked_list::test();
+    test1();
+    return 0;
 }
