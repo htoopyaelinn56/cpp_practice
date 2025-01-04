@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -40,6 +41,48 @@ public:
             cout << endl;
         }
     }
+
+    void displayConnections()
+    {
+        cout << "Adjacency Matrix Connections:" << endl;
+        for (int i = 0; i < V; ++i)
+        {
+            cout << i << " = ";
+            for (int j = 0; j < V; ++j)
+            {
+                if (adjMatrix[i][j])
+                {
+                    cout << j << " ";
+                }
+            }
+            cout << endl;
+        }
+    }
+
+    // DFS utility function
+    void dfsUtil(int vertex, set<int> &visited)
+    {
+        visited.insert(vertex); // Mark the current vertex as visited
+        cout << vertex << " ";  // Print the current vertex
+
+        // Recur for all the vertices adjacent to this vertex
+        for (int i = 0; i < V; ++i)
+        {
+            if (adjMatrix[vertex][i] && visited.count(i) == 0)
+            {
+                dfsUtil(i, visited);
+            }
+        }
+    }
+
+    // Function to perform DFS
+    void dfs(int start)
+    {
+        set<int> visited; // Set to keep track of visited vertices
+        cout << "DFS (Adjacency Matrix): ";
+        dfsUtil(start, visited); // Start DFS from the given vertex
+        cout << endl;
+    }
 };
 
 int main()
@@ -57,7 +100,9 @@ int main()
     g.addEdge(3, 4);
 
     // Display the adjacency matrix
-    g.display();
+    g.displayConnections();
+
+    g.dfs(1);
 
     return 0;
 }
