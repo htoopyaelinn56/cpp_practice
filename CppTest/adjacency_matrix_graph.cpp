@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <queue>
 
 using namespace std;
 
@@ -83,6 +84,35 @@ public:
         dfsUtil(start, visited); // Start DFS from the given vertex
         cout << endl;
     }
+
+    // BFS function
+    void bfs(int start)
+    {
+        set<int> visited; // Set to keep track of visited vertices
+        queue<int> q;     // Queue for BFS
+
+        visited.insert(start); // Mark the starting vertex as visited
+        q.push(start);         // Enqueue the starting vertex
+
+        cout << "BFS (Adjacency Matrix): ";
+        while (!q.empty())
+        {
+            int vertex = q.front(); // Get the front vertex
+            q.pop();                // Dequeue the front vertex
+            cout << vertex << " ";  // Print the current vertex
+
+            // Visit all the adjacent vertices
+            for (int i = 0; i < V; ++i)
+            {
+                if (adjMatrix[vertex][i] && visited.count(i) == 0)
+                {
+                    visited.insert(i); // Mark as visited
+                    q.push(i);         // Enqueue the adjacent vertex
+                }
+            }
+        }
+        cout << endl;
+    }
 };
 
 int main()
@@ -102,7 +132,17 @@ int main()
     // Display the adjacency matrix
     g.displayConnections();
 
-    g.dfs(1);
+    //     0
+    //    / \
+//   1---4
+    //  /|   |
+    // 2 |   |
+    //  \|   |
+    //   3---/
+
+    g.dfs(0);
+
+    g.bfs(0);
 
     return 0;
 }
