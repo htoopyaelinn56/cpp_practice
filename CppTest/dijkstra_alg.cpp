@@ -28,7 +28,7 @@ public:
     }
 
     // Function to add an edge to the graph
-    void addEdge(int u, int v, int weight, bool directed = false)
+    void addEdge(int u, int v, int weight, bool directed = true)
     {
         Edge edge = {u, v, weight};
         adj[u].push_back(edge);
@@ -66,29 +66,31 @@ public:
         while (!pq.empty())
         {
             int current = pq.top().second;
-            cout << "current " << current << endl;
+            cout << "current " << current << ". distance is " << distance[current] << endl;
             pq.pop();
 
             if (visited[current])
                 continue;
             visited[current] = true;
 
-            cout << "visisted " << current << endl;
-
             for (const Edge &edge : adj[current])
             {
                 int next = edge.destination;
                 int weight = edge.weight;
 
-                cout << "Next " << next << ":" << distance[current] << " + " << weight << " < " << distance[next] << endl;
+                cout << "Travelling to " << next << ": " << distance[current] << " + " << weight << " < " << distance[next] << endl;
 
                 if (distance[current] + weight < distance[next])
                 {
                     distance[next] = distance[current] + weight;
+                    cout << "Pushing " << next << " to queue" << endl;
                     pq.push({distance[next], next});
                 }
             }
+            cout << endl;
         }
+
+        cout << endl;
 
         // Result output
         for (int i = 0; i < V; ++i)
