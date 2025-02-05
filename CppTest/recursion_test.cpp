@@ -17,10 +17,10 @@ int sumToNthNonTail(int n)
 
 int main()
 {
-    // sumToNthTail(3, 0) Return 3
-    // -> sumToNthTail(2, 3) Return 5
-    // -> sumToNthTail(1, 5) Return 6
-    // -> sumToNthTail(0, 6) Return 6 *Base Case
+    // sumToNthTail(3, 0)
+    // -> sumToNthTail(2, 0+3 = 3)
+    // -> sumToNthTail(1, 2+3 = 5)
+    // -> sumToNthTail(0, 1+5 = 6) Return 6 *Base Case
     cout << "tail recursion" << endl;
     cout << sumToNthTail(3, 0) << endl;
 
